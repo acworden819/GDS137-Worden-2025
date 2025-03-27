@@ -61,9 +61,22 @@ function Ball()
 			context.translate(this.x, this.y);
 			context.rotate((this.r))
 			context.beginPath()
-			context.arc(0, 0, 50, 0, 360*Math.PI/180, true)
+			context.arc(0, 0, this.height/2, 0, 360*Math.PI/180, true)
 			//context.fillRect((-this.width/2), (-this.height/2), this.width, this.height);
 			context.fill()
+		context.restore();
+		
+	}	
+	this.drawSquare = function()
+	{
+		context.save();
+			context.fillStyle = this.color;
+			context.translate(this.x, this.y);
+			context.rotate((this.r))
+			//context.beginPath()
+			//context.arc(0, 0, 50, 0, 360*Math.PI/180, true)
+			context.fillRect((-this.width/2), (-this.height/2), this.width, this.height);
+			//context.fill()
 		context.restore();
 		
 	}	
