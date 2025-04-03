@@ -94,6 +94,18 @@ function GameObject()
 		return this.x + (this.width/2);
 	}
 	
+	this.hitTestObject = function(obj)
+	{
+		if(this.left() < obj.right() && 
+		   this.right() > obj.left() &&
+		   this.top() < obj.bottom() &&
+		   this.bottom() > obj.top())
+		{
+			return true
+		}
+		return false;
+	}
+	
 	//This changes the player's position
 	this.move = function()
 	{

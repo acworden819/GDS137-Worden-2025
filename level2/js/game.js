@@ -85,9 +85,23 @@ function animate() {
 		ball.vy *= -1;
 		hits++;
 	}
-	if (touchingPaddle()) {
-		//	ball.vx *= -1;
+
+	if (ball.hitTestObject(paddle)){
+		ball.x = paddle.right() + ball.width / 2
+		ball.vx *= -1
+		if (ball.bottom() < paddle.top() + paddle.height / 3) {
+			//touching top
+			ball.vy = -ballSpeed;
+		}
+		if (ball.top() > paddle.bottom() - (paddle.height / 6)) {
+			//touching bottom
+			ball.vy = ballSpeed;
+		}
 	}
+	//if (touchingPaddle()) {
+		//	ball.vx *= -1;
+
+	//}
 
 	//---------------------------------------------------
 
@@ -97,7 +111,7 @@ function animate() {
 	//ball.height = size+(hits*5);
 	//if (hits % 2 == 0) {
 	//	ball.color = "#00ff44"
-	//	ball.drawRect();
+	//	ball.drawRect();	
 	//} else {
 	ball.color = "#8800ff"
 	ball.drawCircle();
