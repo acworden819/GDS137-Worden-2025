@@ -80,6 +80,19 @@ function GameObject()
 		context.restore();
 		
 	}	
+
+	this.top = function(){
+		return this.y - (this.height/2);
+	}
+	this.bottom = function(){
+		return this.y + (this.height/2);
+	}
+	this.left = function(){
+		return this.x - (this.width/2);
+	}
+	this.right = function(){
+		return this.x + (this.width/2);
+	}
 	
 	//This changes the player's position
 	this.move = function()
