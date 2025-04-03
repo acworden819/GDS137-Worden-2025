@@ -42,8 +42,8 @@ function GameObject()
 	this.r = 0;
 	
 	//player's dimensions
-	this.width = 100;
-	this.height = 100;
+	this.width = 35;
+	this.height = 35;
 	
 	//player's velocity or speed on each axis
 	this.vx = 0;

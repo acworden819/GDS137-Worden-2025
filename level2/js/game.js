@@ -26,35 +26,61 @@ ball.vy = 8;
 
 timer = setInterval(animate, interval);
 
+function touchingPaddle(){
+	//console.log(ball.x + paddle.x)
+	if (ball.x <= paddle.x+(paddle.width/2)){
+		if(ball.y < paddle.y+(paddle.height/2) &&  ball.y > paddle.y-(paddle.height/2)) {
+			return true;
+		}
+	}
+	return false;
+}
+
 
 function animate() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
+
+	if (w) paddle.vy = -10;
+	if (s) paddle.vy = 10
+	if (!w && !s) paddle.vy = 0;
+	paddle.move()
 
 	//----Movement Using the Player's move() function----
 	ball.move();
 	//---------------------------------------------------
 
+	if (paddle.y < (paddle.height/2)){
+		paddle.y = paddle.height/2
+	}
+	if (paddle.y > canvas.height-(paddle.height/2)){
+		paddle.y = canvas.height-(paddle.height/2)
+	}
+
 	//--------------Bounce of Right----------------------
 	if (ball.x > canvas.width - ball.width / 2) {
-		ball.vx = -ball.vx;
+		ball.vx *= -1;
 		hits++;
 		//return;
 	}
 	if (ball.x < ball.width / 2) {
-		ball.vx = -ball.vx;	
+		ball.vx *= -1;
 		hits++;
 		//return;
 	}
 	if (ball.y > canvas.height - ball.height / 2) {
-		ball.vy = -ball.vy;
+		ball.vy *= -1;
 		hits++;
 		//return;
 	}
 	if (ball.y < ball.width / 2) {
-		ball.vy = -ball.vy;
+		ball.vy *= -1;
 		hits++;	
 		//return;
 	}
+	if (touchingPaddle()) {
+		ball.vx *= -1;
+	}
+	
 	//---------------------------------------------------
 
 	paddle.drawRect();
