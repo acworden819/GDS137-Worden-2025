@@ -93,7 +93,7 @@ function animate() {
 			//touching top
 			ball.vy = -ballSpeed;
 		}
-		if (ball.top() > paddle.bottom() - (paddle.height / 6)) {
+		if (ball.top() > paddle.bottom() - (paddle.height / 3)) {
 			//touching bottom
 			ball.vy = ballSpeed;
 		}
@@ -106,7 +106,7 @@ function animate() {
 			//touching top
 			ball.vy = -ballSpeed;
 		}
-		if (ball.top() > paddle2.bottom() - (paddle2.height / 6)) {
+		if (ball.top() > paddle2.bottom() - (paddle2.height / 3)) {
 			//touching bottom
 			ball.vy = ballSpeed;
 		}
