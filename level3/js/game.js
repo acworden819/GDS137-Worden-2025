@@ -46,6 +46,16 @@ function renderScore(){
 	context.fillText(p1Wins+" - "+p2Wins, (canvas.width/2), 60, bottomWidth);
 }
 
+function renderLine(){
+	context.strokeStyle = "#036bfc";
+	context.beginPath();
+	context.moveTo(canvas.width/2, 0);
+	context.lineTo(canvas.width/2, canvas.height);
+	context.closePath();
+	context.lineWidth = 3;
+	context.stroke();
+}
+
 function animate() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -102,7 +112,7 @@ function animate() {
 	if (ball.hitTestObject(paddle)){
 		ball.x = paddle.right() + ball.width / 2
 		ball.vx *= -1
-		if (ball.bottom() < paddle.top() + paddle.height / 3) {
+		if (ball.bottom() < paddle.top() + (paddle.height / 3)) {
 			//touching top
 			ball.vy = -ballSpeed;
 		}
@@ -134,7 +144,7 @@ function animate() {
 	ball.color = "#8800ff"
 	ball.drawCircle();
 
-
+	renderLine();
 	renderScore();
 
 	//}
