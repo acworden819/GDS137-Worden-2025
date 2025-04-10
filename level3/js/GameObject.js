@@ -62,8 +62,16 @@ function GameObject()
 			context.rotate((this.r))
 			context.beginPath()
 			context.arc(0, 0, this.height/2, 0, 360*Math.PI/180, true)
-			//context.fillRect((-this.width/2), (-this.height/2), this.width, this.height);
 			context.fill()
+		context.restore();
+		
+	}	
+	this.drawImage = function(image)
+	{
+		context.save();
+			context.fillStyle = this.color;
+			context.translate(this.x, this.y);
+			context.drawImage(img, -this.width/2, -this.height/2, this.width, this.height)
 		context.restore();
 		
 	}	

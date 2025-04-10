@@ -12,6 +12,7 @@ var size = 100;
 var ballSpeed = 8;
 var p1Wins = 0;
 var p2Wins = 0;
+var img = document.getElementById("ric")
 
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
@@ -142,7 +143,7 @@ function animate() {
 	paddle2.drawRect();
 
 	ball.color = "#8800ff"
-	ball.drawCircle();
+	ball.drawImage(img);
 
 	renderLine();
 	renderScore();
