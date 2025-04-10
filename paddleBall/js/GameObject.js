@@ -52,7 +52,7 @@ function GameObject()
 	
 	//This draws the player to the screen
 
-	this.force = 1;
+	this.force = 2;
 
 	this.ax = 1;
 	this.ay = 1;
