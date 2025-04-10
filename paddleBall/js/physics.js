@@ -25,13 +25,11 @@ paddle = new GameObject();
 
 timer = setInterval(animate, interval);
 
-trail = new GameObject();
-trail.color = "#d93b3b"
-
 player.width = 80
 player.height = 80
 player.color = "#ff00ff"
-player.force = 5;
+player.vx = 5
+player.force = 1;
 
 
 paddle.width = 250;
@@ -76,14 +74,10 @@ function animate() {
 
 	showBounce();
 
-	trail.x = lastX
-	trail.y = lastY
-
 	lastX = player.x
 	lastY = player.y
 
 
-	//trail.drawRect(true);
 	player.drawCircle(true);
 
 	paddle.drawRect(true);
@@ -92,7 +86,7 @@ function animate() {
 	context.moveTo(paddle.x, paddle.y);
 	context.lineTo(player.x, player.y);
 	context.closePath();
-	context.lineWidth = 2;
+	context.lineWidth = 1;
 	context.stroke();
 
 	context.font = "16px arial black"
@@ -117,9 +111,7 @@ function showBounce() {
 		paddle.vx += paddle.ax * -paddle.force;
 	}
 
-	player.vy *= frictionY;
-	player.vx *= frictionX;
-
+	//player.vx *= frictionX;
 	paddle.vx *= frictionX;
 
 	player.vy += gravity;
@@ -134,6 +126,11 @@ function showBounce() {
 		player.y = canvas.height - player.height / 2;
 		player.vy = -player.vy * .67;
 		score = 0;
+	}
+
+	if (player.top() < 0){
+		player.y = player.height/2;
+		player.vy = -player.vy
 	}
 
 	if (player.right() > canvas.width){
