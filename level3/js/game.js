@@ -10,6 +10,8 @@ var paddle2;
 var hits = 0;
 var size = 100;
 var ballSpeed = 8;
+var p1Wins = 0;
+var p2Wins = 0;
 
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
@@ -34,6 +36,15 @@ ball.vy = 0;
 
 timer = setInterval(animate, interval);
 
+var topWidth = 300
+var bottomWidth = 100
+
+function renderScore(){
+	context.font = "30px courier"
+	context.textAlign = "center"
+	context.fillText("Player 1 | Player 2", (canvas.width/2), 30, topWidth);
+	context.fillText(p1Wins+" - "+p2Wins, (canvas.width/2), 60, bottomWidth);
+}
 
 function animate() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
@@ -73,9 +84,11 @@ function animate() {
 	//--------------Bounce of Right----------------------
 	if (ball.x > canvas.width - ball.width / 2) {
 		ball.x = canvas.width / 2
+		p1Wins++;
 	}
 	if (ball.x < ball.width / 2) {
 		ball.x = canvas.width / 2
+		p2Wins++;
 	}
 	if (ball.y > canvas.height - ball.height / 2) {
 		ball.vy *= -1;
@@ -120,6 +133,10 @@ function animate() {
 
 	ball.color = "#8800ff"
 	ball.drawCircle();
+
+
+	renderScore();
+
 	//}
 
 
