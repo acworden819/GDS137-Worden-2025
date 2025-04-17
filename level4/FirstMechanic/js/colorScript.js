@@ -31,18 +31,19 @@ function updateColorData() {
                 player.lastColor = player.color;
                 swatch.swatchDown = true;
                 colorAlpha = 0;
-                swatch.lastColor = swatch.color
             }
         }
 
         if (globalLower && swatch.color) {
             if (!swatch.swatchLowering && !swatch.swatchDown) {
                 swatch.color = swatch.interpolateColor('#ffffff', player.color, .3)
+                swatch.lastColor = swatch.color
             }
         }
 
         if (globalRaise) {
             if (!swatch.swatchLowering && !swatch.swatchDown) {
+                console.log(colorAlpha)
                 swatch.color = swatch.interpolateColor(swatch.lastColor, colorSwatchData[i].color, colorAlpha)
             }
         }
@@ -54,7 +55,7 @@ function updateColorData() {
 
                 colorAlpha += 0.05;
 
-                console.log(colorAlpha)
+                //console.log(colorAlpha)
                 player.color = player.interpolateColor(swatch.color, player.originalColor, colorAlpha)
                 backgroundColor = player.color
 
