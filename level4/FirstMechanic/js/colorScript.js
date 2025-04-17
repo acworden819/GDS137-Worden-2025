@@ -4,6 +4,10 @@ function updateColorData() {
     for (let i = 0; i < colorSwatchFolder.length; i++) {
         let swatch = colorSwatchFolder[i]
 
+        if (swatch.swatchDown) {
+            swatch.swatchFrames++;  //increase frames
+        }
+
         if (player.hitTestObject(swatch) && !swatch.swatchLowering) {
             if (player.color == player.originalColor) {
                 swatch.swatchFrames = 0;
@@ -11,7 +15,7 @@ function updateColorData() {
                 swatch.swatchLowering = true
                 globalLower = true;
             }
-            player.y = swatch.y - swatchSize.height * 2
+            player.y = swatch.y - swatchSize.height/2-player.height/2
         }
 
         if (swatch.swatchLowering) {
@@ -30,11 +34,8 @@ function updateColorData() {
                 swatch.lastColor = swatch.color
             }
         }
-        if (swatch.swatchDown) {
-            swatch.swatchFrames++;
-        }
 
-        if (globalLower && swatch.color) { //also check for default color
+        if (globalLower && swatch.color) {
             if (!swatch.swatchLowering && !swatch.swatchDown) {
                 swatch.color = swatch.interpolateColor('#ffffff', player.color, .3)
             }
