@@ -14,11 +14,14 @@ function GameObject(obj) {
 	//whether or not the object can jump
 	this.canJump = false;
 	this.jumpHeight = -25;
+
+	//----color stuff---//
 	this.swatch = false;
 	this.swatchDown = false;
 	this.swatchFrames = 0;
-	this.abilityLength = 3;
 	this.swatchDown = false;
+	this.abilityLength = 3;
+	//------------------//
 
 	//------Allows us to pass object literals into the class to define its properties--------//
 	//------This eliminate the need to pass in the property arguments in a specific order------------//
