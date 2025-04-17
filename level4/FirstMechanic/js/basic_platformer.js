@@ -22,7 +22,7 @@ timer = setInterval(animate, interval);
 function animate() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
 
-	if (w && player.canJump && player.vy == 0) {
+	if ((w || space) && player.canJump && player.vy == 0) {
 		player.canJump = false;
 		player.vy += player.jumpHeight;
 	}
