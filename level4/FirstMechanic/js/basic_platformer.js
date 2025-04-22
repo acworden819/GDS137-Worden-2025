@@ -20,6 +20,10 @@ interval = 1000 / 60;
 timer = setInterval(animate, interval);
 
 function animate() {
+	
+	canvas.width = window.innerWidth
+	canvas.height = window.innerHeight
+	
 	context.clearRect(0, 0, canvas.width, canvas.height);
 
 	if ((w || space) && player.canJump && player.vy == 0) {
@@ -83,6 +87,7 @@ function animate() {
 	floor.drawRect();
 
 	//player.drawDebug()
+
 
 }
 

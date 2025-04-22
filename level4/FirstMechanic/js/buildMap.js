@@ -1,3 +1,6 @@
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
+
 floor = new GameObject({color: "#f2f2f2"});
 floor.width = canvas.width;
 floor.x = canvas.width / 2;
