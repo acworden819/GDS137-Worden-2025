@@ -6,7 +6,7 @@ var colorGroups = {
 }
 
 function GameObject(obj) {
-	
+
 	this.interpolateColor = function(c1, c2, alpha){
 
 		const hexToRgb = (hex) => {
@@ -85,7 +85,6 @@ function GameObject(obj) {
 			this.color = this.interpolateColor("#ffffff", colorGroups[this.colorGroup], .2)
 		}
 	}
-	console.log(this.color)
 
 	this.originalColor = this.color
 	this.lastColor = this.color

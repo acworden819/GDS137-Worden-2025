@@ -108,15 +108,21 @@ function animate() {
 		colorPlatformsFolder[i].drawRect();
 
 		while (colorPlatformsFolder[i].hitTestPoint(player.bottom()) && player.vy >= 0) {
-			player.y--;
-			player.vy = 0;
-			player.canJump = true;
+			
+			if (colorPlatformsFolder[i].isPlatform){
+				player.y--;
+				player.vy = 0;
+				player.canJump = true;
+			}else if (colorPlatformsFolder[i].isDoor){
+				player.x--;
+			}
+
 		}
-		while (colorPlatformsFolder[i].hitTestPoint(player.left()) && player.vx <= 0) {
+		while (colorPlatformsFolder[i].hitTestPoint(player.left()) && player.vx <= 0 && !colorPlatformsFolder[i].isPlatform) {
 			player.x++;
 			player.vx = 0;
 		}
-		while (colorPlatformsFolder[i].hitTestPoint(player.right()) && player.vx >= 0) {
+		while (colorPlatformsFolder[i].hitTestPoint(player.right()) && player.vx >= 0 && !colorPlatformsFolder[i].isPlatform) {
 			player.x--;
 			player.vx = 0;
 		}

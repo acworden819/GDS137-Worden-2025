@@ -90,7 +90,6 @@ function updateColorData() {
 
         if (globalRaise) {
             if (!swatch.swatchLowering && !swatch.swatchDown) {
-                console.log(colorAlpha)
                 swatch.color = swatch.interpolateColor(swatch.lastColor, colorGroups[colorSwatchData[i].colorGroup], colorAlpha)
             }
         }
