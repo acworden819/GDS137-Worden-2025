@@ -4,44 +4,46 @@ function updateColorData() {
     for (let i = 0; i < colorChangingObjects.length; i++) {
         let object = colorChangingObjects[i];
 
-        let platformAlpha = .3
+        let worldAlpha = .3
         if (object.isPlatform) {
-            platformAlpha = .7
-            if (player.colorGroup == object.colorGroup){
+            worldAlpha = .7
+            if (player.colorGroup == object.colorGroup) {
                 object.y = object.originalY
-            }else{
+            } else {
                 object.y = 50000
             }
         }
+        if (object.isDoor) {
+            if (player.colorGroup == object.colorGroup) {
+                worldAlpha = .2
+            }
+        }
 
-        
         if (globalLower) {
-            object.color = object.interpolateColor('#ffffff', player.color, platformAlpha)
+            if (!object.isDoor || player.colorGroup != object.colorGroup) object.color = object.interpolateColor('#ffffff', player.color, worldAlpha);
             object.lastColor = object.color
 
         }
 
         if (globalRaise) {
             object.color = object.interpolateColor(object.lastColor, object.originalColor, colorAlpha)
+            if (object.isDoor){
+                object.y = object.originalY
+            } 
         }
 
-        if (object.isDoor) {
-            if (player.colorGroup != object.colorGroup){
-                object.y = object.originalY
-
-            }else{
+        if (object.isDoor && !globalLower && !globalRaise) {  //unlock doors
+            if (player.colorGroup == object.colorGroup) {
                 object.y = 50000
             }
         }
 
         if (colorAlpha >= .94 && globalRaise) {
-            console.log("end")
             object.color = object.interpolateColor(object.lastColor, object.originalColor, 1)
-
             player.colorGroup = null;
         }
-    }
 
+    }
 
     for (let i = 0; i < colorSwatchFolder.length; i++) {
         let swatch = colorSwatchFolder[i]
@@ -100,7 +102,6 @@ function updateColorData() {
 
                 colorAlpha += 0.05;
 
-                //console.log(colorAlpha)
                 player.color = player.interpolateColor(swatch.color, player.originalColor, colorAlpha)
                 backgroundColor = player.color
 

@@ -6,6 +6,37 @@ var colorGroups = {
 }
 
 function GameObject(obj) {
+	
+	this.interpolateColor = function(c1, c2, alpha){
+
+		const hexToRgb = (hex) => {
+			const sanitizedHex = hex.replace("#", "");
+			const r = parseInt(sanitizedHex.substring(0, 2), 16);
+			const g = parseInt(sanitizedHex.substring(2, 4), 16);
+			const b = parseInt(sanitizedHex.substring(4, 6), 16);
+			return { r, g, b };
+		  };
+		
+		  const rgbToHex = (r, g, b) => {
+			const componentToHex = (c) => {
+			  const hex = c.toString(16);
+			  return hex.length === 1 ? "0" + hex : hex;
+			};
+		
+			return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+		  };
+		
+		  const rgb1 = hexToRgb(c1);
+		  const rgb2 = hexToRgb(c2);
+		
+		  const interpolatedR = Math.round(rgb1.r + (rgb2.r - rgb1.r) * alpha);
+		  const interpolatedG = Math.round(rgb1.g + (rgb2.g - rgb1.g) * alpha);
+		  const interpolatedB = Math.round(rgb1.b + (rgb2.b - rgb1.b) * alpha);
+		
+		  return rgbToHex(interpolatedR, interpolatedG, interpolatedB);
+
+	}
+
 	this.x = canvas.width / 2;
 	this.y = canvas.height / 2;
 	this.width = 100;
@@ -50,6 +81,9 @@ function GameObject(obj) {
 		if (this.isPlatform){
 			this.color = backgroundColor
 		}
+		if (this.isDoor){
+			this.color = this.interpolateColor("#ffffff", colorGroups[this.colorGroup], .2)
+		}
 	}
 	console.log(this.color)
 
@@ -77,35 +111,7 @@ function GameObject(obj) {
 
 	}
 
-	this.interpolateColor = function(c1, c2, alpha){
 
-		const hexToRgb = (hex) => {
-			const sanitizedHex = hex.replace("#", "");
-			const r = parseInt(sanitizedHex.substring(0, 2), 16);
-			const g = parseInt(sanitizedHex.substring(2, 4), 16);
-			const b = parseInt(sanitizedHex.substring(4, 6), 16);
-			return { r, g, b };
-		  };
-		
-		  const rgbToHex = (r, g, b) => {
-			const componentToHex = (c) => {
-			  const hex = c.toString(16);
-			  return hex.length === 1 ? "0" + hex : hex;
-			};
-		
-			return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-		  };
-		
-		  const rgb1 = hexToRgb(c1);
-		  const rgb2 = hexToRgb(c2);
-		
-		  const interpolatedR = Math.round(rgb1.r + (rgb2.r - rgb1.r) * alpha);
-		  const interpolatedG = Math.round(rgb1.g + (rgb2.g - rgb1.g) * alpha);
-		  const interpolatedB = Math.round(rgb1.b + (rgb2.b - rgb1.b) * alpha);
-		
-		  return rgbToHex(interpolatedR, interpolatedG, interpolatedB);
-
-	}
 
 	this.move = function () {
 		this.x += this.vx;
