@@ -214,6 +214,6 @@ gameStates[`game`] = function () {
 	floor.color = floor.interpolateColor(floor.originalColor, backgroundColor, .2)
 	floor.drawRect();
 
-	//player.drawDebug()
+	//player.drawDebug() //
 }
 
