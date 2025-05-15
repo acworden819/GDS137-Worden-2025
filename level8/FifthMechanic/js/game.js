@@ -15,6 +15,8 @@ var fX = .85;
 var fY = .97;
 
 var gravity = 1;
+var jumps = 0;
+var defaultJH = player.jumpHeight
 
 interval = 1000 / 60;
 timer = setInterval(animate, interval);
@@ -26,10 +28,20 @@ function animate() {
 	
 	context.clearRect(0, 0, canvas.width, canvas.height);
 
-	if ((w || space) && player.canJump && player.vy == 0) {
+	if ((w || space) && player.canJump && player.vy >= 0) {
 		player.canJump = false;
 		player.vy += player.jumpHeight * gravity;
+		jumps++;
+	}	
+	if(jumps<player.jumpCount){
+		player.canJump = true
+	}else{
+		player.canJump = false;
+		if(player.vy == 0){
+			jumps = 0;
+		}
 	}
+	console.log(jumps)
 
 	if (a) {
 		player.vx += -player.ax * player.force;
@@ -100,6 +112,7 @@ function animate() {
 		context.fillText(text, canvas.width/2, 40)
 	}else{
 		gravity = 1;
+		player.jumpCount = 1;
 	}
 
 	if(shift && player.colorGroup == 'red'){
@@ -111,6 +124,9 @@ function animate() {
 	if(r && player.colorGroup == 'green'){
 		r = false;
 		gravity *= -1
+	}
+	if(space && player.colorGroup == 'blue'){
+		player.jumpCount = 2;
 	}
 
 	//------------------------------------
